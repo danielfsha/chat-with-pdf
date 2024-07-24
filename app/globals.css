@@ -67,3 +67,18 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .wrapper {
+    @apply w-full max-w-4xl mx-auto px-4;
+  }
+
+  .gradient__background,
+  .gradient__text {
+    @apply bg-gradient-to-br from-[#03001e] via-[#7303c0] to-[#ec38bc];
+  }
+
+  .gradient__text {
+    @apply text-transparent bg-clip-text;
+  }
+}
