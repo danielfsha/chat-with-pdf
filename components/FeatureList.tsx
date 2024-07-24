@@ -30,7 +30,7 @@ function getIcon(icon: string) {
 
 function FeatureList({}: Props) {
   return (
-    <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 space-x-2">
       {features.map((feature, index) => (
         <ShineBorder
           key={index}
@@ -50,7 +50,7 @@ function FeatureList({}: Props) {
 
           <div className="flex flex-col gap-2 items-start">
             {feature.descriptions.map((description, index) => (
-              <div className="flex items-start justify-center">
+              <div key={index} className="flex items-start justify-center">
                 <Check className="w-6 h-6 text-green-500" />
                 <p className="ml-2">{description}</p>
               </div>

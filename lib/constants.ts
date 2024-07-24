@@ -28,15 +28,6 @@ export const features: Feature[] = [
         ],
         icon: "MagnifyingGlass",
     },
-    {
-        title: 'Navigate & Explore',
-        descriptions: [
-            'Navigate through the PDF to find specific information.',
-            'Explore the PDF to gain a deeper understanding.',
-            'Handle complex data structures.'
-        ],
-        icon: "Compass",
-    }
 ];
 
 

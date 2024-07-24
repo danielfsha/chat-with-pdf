@@ -7,7 +7,7 @@ type Props = {};
 
 function Header({}: Props) {
   return (
-    <header className="flex items-center justify-between py-4 px-4 shadow-xl shadow-gray-500/10">
+    <header className="flex items-center justify-between py-4 px-4 shadow-2xl bg-white shadow-gray-500/10">
       <h1 className="text-xl font-bold gradient__text">PDF.AI</h1>
 
       <SignedOut>

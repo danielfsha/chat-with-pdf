@@ -9,8 +9,10 @@ type Props = {
 const layout = ({ children }: Props) => {
   return (
     <ClerkLoaded>
-      <Header />
-      {children}
+      <div className="bg-gray-50 h-screen w-screen overflow-x-hidden">
+        <Header />
+        {children}
+      </div>
     </ClerkLoaded>
   );
 };
