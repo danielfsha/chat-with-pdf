@@ -6,4 +6,11 @@ type Feature = {
     icon: string;
 };
 
-export type { Feature };
+type Pricing = {
+    title: string;
+    description: string;
+    features: Array<string>,
+    subscriptionFeePerMonth: number;
+}
+
+export type { Feature, Pricing };

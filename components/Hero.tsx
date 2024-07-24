@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { cn } from "@/lib/utils";
 import GridPattern from "@/components/magicui/grid-pattern";
 import ShimmerButton from "@/components/magicui/shimmer-button";
@@ -16,11 +18,12 @@ const Hero = () => {
         Make PDFs interactive and engaging. Ask questions, clarify doubts, and
         get answers directly within the document.
       </p>
-      <ShimmerButton className="shadow-2xl">
-        <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
-          Get Started now
-        </span>
-      </ShimmerButton>
+      <Link
+        href="/dashboard"
+        className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg"
+      >
+        <ShimmerButton className="shadow-2xl">Get Started now</ShimmerButton>
+      </Link>
       <GridPattern
         width={100}
         height={100}

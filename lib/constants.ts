@@ -1,4 +1,4 @@
-import { Feature } from "./types";
+import { Feature, Pricing } from "./types";
 
 export const features: Feature[] = [
     {
@@ -38,3 +38,31 @@ export const features: Feature[] = [
         icon: "Compass",
     }
 ];
+
+
+export const plans: Pricing[] = [
+    {
+        title: "Free",
+        description: "If you are just getting started, this plan is ideal for you. It offers a balance of essential features and is perfect for personal needs without any limitations.",
+        features: [
+            '10 documents',
+            '5MB Max File size',
+            'Basic analytics and reporting',
+            'email support',
+        ],
+        subscriptionFeePerMonth: 0
+    },{
+        title: 'Pro',
+        description: 'If you are looking for more advanced features and support, this plan is the right choice for you.',
+        features: [
+            'Unlimited documents',
+            'Unlimited File size',
+            'Custom domain support',
+            'Advanced analytics and reporting',
+            '24/7 support',
+            'Priority customer support',
+            'Access to our private beta',
+        ],
+        subscriptionFeePerMonth: 6.99
+    }
+]

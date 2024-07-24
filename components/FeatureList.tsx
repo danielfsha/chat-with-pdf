@@ -33,6 +33,7 @@ function FeatureList({}: Props) {
     <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
       {features.map((feature, index) => (
         <ShineBorder
+          key={index}
           className="relative flex h-full w-full flex-col items-center justify-start overflow-hidden rounded-lg border bg-background md:shadow-xl p-8 space-y-4"
           color={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
         >
