@@ -7,6 +7,8 @@ type Props = {};
 
 export default function FileUploader({}: Props) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
+    console.log(acceptedFiles);
+
     acceptedFiles.forEach((file: File) => {
       const reader = new FileReader();
 
