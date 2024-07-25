@@ -33,13 +33,14 @@ function Header({}: Props) {
 
       <SignedIn>
         <div className="flex items-center space-x-2">
-          <Link href="/dashboard">
-            <ShimmerButton className="shadow-2xl">
-              <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
-                My documents
-              </span>
-            </ShimmerButton>
-          </Link>
+          <ShimmerButton
+            onClick={() => router.push("/dashboard")}
+            className="shadow-2xl"
+          >
+            <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
+              My documents
+            </span>
+          </ShimmerButton>
 
           <Button
             onClick={() => router.push("/dashboard/new")}
