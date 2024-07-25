@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { GridNine, List } from "@phosphor-icons/react";
 import Document from "@/components/Document";
+import PlaceholderDocument from "../../components/PlaceholderDocument";
 
 export default function Dashboard() {
   const [documents, setDocuments] = useState([]);
@@ -15,7 +16,9 @@ export default function Dashboard() {
       </div>
 
       <div className={`grid grid-cols-3 gap-2`}>
-        <Document />
+        {/* placeholder / create new doucment */}
+        <PlaceholderDocument />
+        {/* <Document /> */}
       </div>
     </main>
   );

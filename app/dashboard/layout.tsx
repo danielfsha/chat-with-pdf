@@ -9,7 +9,7 @@ type Props = {
 const layout = ({ children }: Props) => {
   return (
     <ClerkLoaded>
-      <div className="bg-gray-50 h-screen w-screen overflow-x-hidden">
+      <div className="flex-1 bg-gray-50 w-screen overflow-x-hidden flex flex-col">
         <Header />
         {children}
       </div>
