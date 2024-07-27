@@ -124,7 +124,7 @@ export default function PdfPreview({ url }: { url: string }) {
           <div className="flex items-center justify-center space-x-1">
             <Button
               variant="outline"
-              szie="icon"
+              size="icon"
               onClick={() => performDocumentActions("zoom-out")}
             >
               <MagnifyingGlassMinus size={22} />
@@ -134,7 +134,7 @@ export default function PdfPreview({ url }: { url: string }) {
 
             <Button
               variant="outline"
-              szie="icon"
+              size="icon"
               onClick={() => performDocumentActions("zoom-in")}
             >
               <MagnifyingGlassPlus size={22} />

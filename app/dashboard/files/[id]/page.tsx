@@ -13,6 +13,8 @@ async function FileChatPage({ params: { id } }: Props) {
 
   const { userId } = await auth();
 
+  if (!userId) return <div>You need to be logged in to view this page</div>;
+
   const ref = await adminDB
     .collection("users")
     .doc(userId)
