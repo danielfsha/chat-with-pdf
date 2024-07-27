@@ -16,7 +16,7 @@ function Header({}: Props) {
   const router = useRouter();
 
   return (
-    <header className="flex items-center justify-between py-4 px-4 shadow-2xl bg-white shadow-gray-500/10">
+    <header className="flex items-center justify-between py-2 px-4 shadow-2xl bg-white shadow-gray-500/10">
       <Link href="/" className="text-xl font-bold gradient__text">
         PDF.AI
       </Link>
@@ -32,14 +32,12 @@ function Header({}: Props) {
       </SignedOut>
 
       <SignedIn>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-between space-x-2">
           <ShimmerButton
+            className="p-2 px-4"
             onClick={() => router.push("/dashboard")}
-            className="shadow-2xl"
           >
-            <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
-              My documents
-            </span>
+            My documents
           </ShimmerButton>
 
           <Button

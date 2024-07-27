@@ -1,30 +1,42 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+
+import useUploadFile from "@/hooks/useUploadFile";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 export default function FileUploader({}: Props) {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    console.log(acceptedFiles);
+  const { progress, status, fileId, handleUpload } = useUploadFile();
+  const router = useRouter();
 
-    acceptedFiles.forEach((file: File) => {
-      const reader = new FileReader();
+  useEffect(() => {
+    if (fileId) {
+      router.push(`/dashboard/files/${fileId}`);
+    }
+  }, [fileId, router]);
 
-      reader.onabort = () => console.log("file reading was aborted");
-      reader.onerror = () => console.log("file reading has failed");
-      reader.onload = () => {
-        // Do whatever you want with the file contents
-        const binaryStr = reader.result;
-        console.log(binaryStr);
-      };
-      reader.readAsArrayBuffer(file);
-    });
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+
+    if (file) {
+      await handleUpload(file);
+    } else {
+      alert("Please select a file");
+    }
   }, []);
 
   const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept } =
-    useDropzone({ onDrop });
+    useDropzone({
+      onDrop,
+      maxFiles: 1,
+      accept: {
+        "application/pdf": [".pdf"],
+        "application/msword": [".doc", ".docx"],
+      },
+    });
 
   return (
     <div
