@@ -23,7 +23,7 @@ export default function Footer() {
         </Link>
       </span>
       <span className="font-medium text-gray-500">
-        Copyright © <span x-text="year">2024</span>
+        <span x-text="year">2024</span>
         <Link
           href="https://danielfisseha.vercel.app"
           className="mx-2 gradient__text"

@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/elements": "^0.10.4",
     "@clerk/nextjs": "^5.2.4",
+    "@deepgram/sdk": "^3.6.0",
     "@langchain/community": "^0.2.20",
     "@langchain/core": "^0.2.18",
     "@langchain/google-genai": "^0.0.23",
@@ -46,6 +47,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "daisyui": "^4.12.10",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
