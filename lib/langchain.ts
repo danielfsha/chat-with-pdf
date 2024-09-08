@@ -1,7 +1,6 @@
 import { ChatOpenAI } from '@langchain/openai';
 import { PDFLoader } from '@langchain/community/document_loaders/fs/pdf'; 
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
-import { OpenAIEmbeddings } from '@langchain/openai';
 import { createStuffDocumentsChain } from 'langchain/chains/combine_documents';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { createRetrievalChain } from "langchain/chains/retrieval"
@@ -15,17 +14,7 @@ import { Index, RecordMetadata } from '@pinecone-database/pinecone'
 import pineconeClient from './pincone';
 
 import { adminDB } from '@/firebaseAdmin';
-
 import { auth } from '@clerk/nextjs/server';
-
-if (!process.env.OPENAI_API_KEY) {
-  throw new Error('OPENAI_API_KEY is not set')
-}
-
-// const model = new ChatOpenAI({
-//     modelName: 'gpt-3.5-turbo',
-//     apiKey: process.env.OPENAI_API_KEY,
-// });
 
 import { ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 const model = new ChatGoogleGenerativeAI({
@@ -37,11 +26,33 @@ const model = new ChatGoogleGenerativeAI({
 // export const indexName = 'pdf-chat';
 export const indexName = 'pdf-chat-google';
 
-
 async function nameSpaceExists(index: Index<RecordMetadata>, namespace: string) {
     if (namespace == null) throw new Error('Namespace is null');
     const  {namespaces} = await index.describeIndexStats();
     return namespaces?.[namespace] != null;
+}
+
+async function fetchChatHistory(docId: string) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error('User not logged in');
+  }
+
+  const ref = await adminDB
+    .collection('users')
+    .doc(userId)
+    .collection('files')
+    .doc(docId)
+    .collection('chat')
+    .orderBy('createdAt', 'desc')
+    .get();
+
+  const chatHistory = await ref.docs.map((doc) => {
+    return doc.data().role == 'Human' ? new HumanMessage(doc.data().message) : new AIMessage(doc.data().message);
+  });
+
+  return chatHistory;
 }
 
 async function generateDocs(docId: string) {
@@ -146,4 +157,73 @@ export async function generateEmbeddingsInPineconeVectorStore(docId: string) {
 
         return pineconeVectorStore;
     }
+}
+
+export async function generateLangchainChatCompletion(docId: string, question: string) {
+  let pineconeVectorStore;
+
+  pineconeVectorStore = await generateEmbeddingsInPineconeVectorStore(docId);
+  
+  console.log('Retrieving documents from Pinecone...');
+
+  if (!pineconeVectorStore) {
+    throw new Error('Pinecone vector store not found');
+  }
+
+  const retriever = pineconeVectorStore.asRetriever();
+
+  const chatHistory = await fetchChatHistory(docId);
+
+  const histotyAwarePrompt = ChatPromptTemplate.fromMessages([
+    ...chatHistory,
+
+    ["user", "{input}"],
+    [
+      'user',
+      'Given the above conversation and document, answer the following question: {input} consicely.'
+    ]
+  ]);
+
+  const histotyAwareRetrieverChain = await createHistoryAwareRetriever({
+    llm: model,
+    retriever,
+    rephrasePrompt: histotyAwarePrompt
+  });
+
+  console.log('Retrieving documents from Pinecone...');
+
+  const historyAwareRetrieverPrompt = ChatPromptTemplate.fromMessages([
+    [
+      "system",
+      "You are a helpful assistant. Answer the user question in short and consice manner as based on the conversation and {context}."
+    ],
+
+    ...chatHistory,
+    ["user", "{input}"],
+  ])
+
+
+  console.log('create documen combine chain...');
+
+  const historyAwareCombineChain = await createStuffDocumentsChain({
+    llm: model,
+    prompt: historyAwareRetrieverPrompt,
+  })
+
+
+  console.log('create the main retrieval chain...');
+  const conversationRetrievalChain = await createRetrievalChain({
+    retriever: pineconeVectorStore.asRetriever(),
+    combineDocsChain: historyAwareCombineChain,
+  });
+
+  console.log('run the chain with the conversation...');
+  const reply = await conversationRetrievalChain.invoke({
+    chat_history: chatHistory,
+    input: question,
+  });
+
+
+  console.log('reply:', reply.answer);
+  return reply.answer;
 }

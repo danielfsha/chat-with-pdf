@@ -8,37 +8,35 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import ShimmerButton from "./magicui/shimmer-button";
 
-import { FilePlus } from "@phosphor-icons/react";
+import { Plus } from "@phosphor-icons/react";
 
 type Props = {};
 
-function Header({}: Props) {
+function Header({ }: Props) {
   const router = useRouter();
 
   return (
-    <header className="flex items-center justify-between py-2 px-4 shadow-2xl bg-white shadow-gray-500/10">
-      <Link href="/" className="text-xl font-bold gradient__text">
-        PDF.AI
+    <header className="flex items-center justify-between py-2 px-4 bg-white border-b">
+      <Link href="/" className="text-xl font-bold">
+        pdf.ai
       </Link>
 
       <SignedOut>
         <SignInButton>
-          <ShimmerButton className="shadow-2xl">
-            <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
-              Sign in
-            </span>
+          <ShimmerButton>
+            Sign in
           </ShimmerButton>
         </SignInButton>
       </SignedOut>
 
       <SignedIn>
         <div className="flex items-center justify-between space-x-2">
-          <ShimmerButton
+          <Link
+            href="/dashboard"
             className="p-2 px-4"
-            onClick={() => router.push("/dashboard")}
           >
             My documents
-          </ShimmerButton>
+          </Link>
 
           <Button
             onClick={() => router.push("/dashboard/new")}
@@ -46,9 +44,16 @@ function Header({}: Props) {
             className="rounded-full"
             size="icon"
           >
-            <FilePlus size={24} />
+            <Plus size={24} />
           </Button>
-          <UserButton />
+          <UserButton
+            appearance={{
+              elements: {
+                rootBox: "w-9 h-9",
+                avatarBox: "w-9 h-9",
+              },
+            }}
+          />
         </div>
       </SignedIn>
     </header>

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 type Props = {};
 
-export default function FileUploader({}: Props) {
+export default function FileUploader({ }: Props) {
   const { progress, status, fileId, handleUpload } = useUploadFile();
   const router = useRouter();
 
@@ -41,9 +41,8 @@ export default function FileUploader({}: Props) {
   return (
     <div
       {...getRootProps()}
-      className={`overflow-hidden flex-1 w-full min-h-[50vh] bg-white shadow-xl rounded-lg shadow-gray-500/10 cursor-pointer border-2 border-dashed border-gray-600 flex flex-col items-center justify-center text-center p-12 py-28 ${
-        isFocused || isDragAccept ? "bg-[#7303c0]/30 border-[#7303c0]" : ""
-      }`}
+      className={`overflow-hidden flex-1 w-full min-h-[50vh] bg-white rounded-lg border flex flex-col items-center justify-center text-center p-12 py-28 ${isFocused || isDragAccept ? "bg-[#7303c0]/30 border-[#7303c0]" : ""
+        }`}
     >
       <input {...getInputProps()} />
       {isDragActive ? (

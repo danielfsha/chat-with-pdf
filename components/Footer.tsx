@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="wrapper w-full flex items-center justify-between py-12">
+    <footer className="wrapper w-full flex flex-col-reverse items-center justify-center py-12 space-y-4 lg:flex-row lg:justify-between lg:space-y-0">
       <span className="inline-flex justify-center gap-3">
         <Link
           href="https://github.com/danielfsha/"

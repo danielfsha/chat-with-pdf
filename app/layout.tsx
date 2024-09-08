@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
 
 import { ClerkProvider } from "@clerk/nextjs";
-
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 export const metadata: Metadata = {
   title: "PDF Chat",
@@ -26,8 +23,8 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={cn(
-            "h-screen w-screen bg-background font-sans antialiased flex flex-col overflow-hidden",
-            fontSans.variable,
+            "h-screen w-screen bg-background antialiased flex flex-col",
+            GeistSans.className,
           )}
         >
           {children}

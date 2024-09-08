@@ -2,11 +2,11 @@
 
 import { useRouter } from "next/navigation";
 
-import { FilePlus } from "@phosphor-icons/react";
+import { FilePlus, Plus } from "@phosphor-icons/react";
 
 type Props = {};
 
-function PlaceholderDocument({}: Props) {
+function PlaceholderDocument({ }: Props) {
   const router = useRouter();
   const handleClick = () => {
     router.push("/dashboard/new");
@@ -15,9 +15,9 @@ function PlaceholderDocument({}: Props) {
   return (
     <div
       onClick={handleClick}
-      className="bg-white h-[250px] border shadow-xl rounded-xl shadow-gray-500/10 flex flex-col items-center justify-center hover:bg-[#7303c0] hover:text-white space-y-3"
+      className="bg-white h-[250px] border rounded-xl flex flex-col items-center justify-center hover:bg-black hover:text-white space-y-3"
     >
-      <FilePlus size={32} />
+      <Plus size={32} />
       <h1 className="text-center text-sm font-bold">Create new document</h1>
     </div>
   );
