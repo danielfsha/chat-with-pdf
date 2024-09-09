@@ -21,7 +21,7 @@ async function FileChatPage({ params: { id } }: Props) {
   const ref = await adminDB.collection("users").doc(userId).collection("files").doc(id).get();
   const url = ref.data()?.url;
 
-  console.log("URL of the file: ", url);
+  // console.log("URL of the file: ", url);
 
   return (
     <div className="h-full w-full flex-1 flex justify-between items-stretch overflow-hidden">

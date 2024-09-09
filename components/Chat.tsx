@@ -91,7 +91,7 @@ function Chat({ id }: Props) {
       const { is_final: isFinal, speech_final: speechFinal } = data;
       let thisCaption = data.channel.alternatives[0].transcript;
 
-      console.log("thisCaption", thisCaption);
+      // console.log("thisCaption", thisCaption);
       if (thisCaption !== "") {
         setInputMessage(thisCaption);
       }
@@ -182,7 +182,7 @@ function Chat({ id }: Props) {
       });
       const lastReply = messages[messages.length - 1];
       if (lastReply.role === "AI") {
-        console.log("lastReply message: ", lastReply.message);
+        // console.log("lastReply message: ", lastReply.message);
       }
     };
 
@@ -230,7 +230,7 @@ function Chat({ id }: Props) {
             <div key={message.id} className={`chat ${message.role == "Human" ? "chat-end" : "chat-start"}`}>               
               <p className={`chat chat-bubble ${message.role == 'AI' && '!bg-gray-200 !text-black'}`}>
                 {/* the actual content is inside the message */}
-                <ReactMarkdown>message.message</ReactMarkdown>
+                <ReactMarkdown>{message.message}</ReactMarkdown>
               </p>
 
               {
