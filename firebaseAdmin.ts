@@ -1,7 +1,7 @@
 import {initializeApp, getApps, App,cert} from "firebase-admin/app";
 import {getFirestore} from "firebase-admin/firestore";
 
-var serviceAccount = require("service-account.json");
+var serviceAccount = require("./service-account.json");
 
 let app: App;
 

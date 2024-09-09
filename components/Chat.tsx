@@ -230,7 +230,7 @@ function Chat({ id }: Props) {
             <div key={message.id} className={`chat ${message.role == "Human" ? "chat-end" : "chat-start"}`}>               
               <p className={`chat chat-bubble ${message.role == 'AI' && '!bg-gray-200 !text-black'}`}>
                 {/* the actual content is inside the message */}
-                <ReactMarkdown children={message.message} />
+                <ReactMarkdown>message.message</ReactMarkdown>
               </p>
 
               {
