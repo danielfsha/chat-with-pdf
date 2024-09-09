@@ -1,3 +1,6 @@
+### Don't forget to add your service account key and set a service-account.json file in the root of the project.
+its found from the firebase console.
+
 ### GENERATE EMBEDDINGs
 pinecone is a vector database that stores embeddings of documents. it is a serverless vector database that can be used to store embeddings of documents and then use them to retrieve the most similar documents to a given document.
 
