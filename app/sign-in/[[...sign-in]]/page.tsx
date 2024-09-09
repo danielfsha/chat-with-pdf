@@ -11,7 +11,7 @@ export default function SignInPage() {
           name="start"
           className="w-full space-y-6 rounded-2xl bg-white px-4 py-10 shadow-md ring-1 ring-black/5 sm:w-96 sm:px-8"
         >
-          <header className="text-center">
+          <div className="text-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -37,7 +37,7 @@ export default function SignInPage() {
             <h1 className="mt-4 text-xl font-medium tracking-tight text-zinc-950">
               Sign in to Clover
             </h1>
-          </header>
+          </div>
           <Clerk.GlobalError className="block text-sm text-red-400" />
           <div className="space-y-4">
             <Clerk.Field name="identifier" className="space-y-2">
